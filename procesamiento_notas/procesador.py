@@ -31,7 +31,7 @@ def limpiar_df (df):
 def analisis_df (df):
 
     # analsis df
-    materias_df = ["Nombre y Apellido", "Cantidad_materias"]
+    materias_df = ["Nombre y Apellido", "Cantidad materias"]
     for i in range(10):
         materias_df.append(f"materias {i}")
     # Creamos un df_vacio
@@ -55,11 +55,11 @@ def analisis_df (df):
 
             if len(materias_x_alumno) > 0:
                 df_adeudantes_x_año.loc[contador_adeudantes, "Nombre y Apellido"] = df.loc[index, "Nombre y Apellido"]
-                df_adeudantes_x_año.loc[contador_adeudantes, "Cantidad_materias"] = len(materias_x_alumno)
+                df_adeudantes_x_año.loc[contador_adeudantes, "Cantidad materias"] = len(materias_x_alumno)
                 for c in range(len(materias_x_alumno)):
                     df_adeudantes_x_año.loc[contador_adeudantes, f"materias {c}"] = materias_x_alumno[c]
                 contador_adeudantes +=1
         else:
             break
-        
+    
     return df_adeudantes_x_año
