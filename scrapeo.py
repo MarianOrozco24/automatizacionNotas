@@ -89,11 +89,12 @@ def scrapeo ():
 
     time.sleep(1)
     año = [1,2,3,4,5]
-    division = [1,2, 3, 4, 5]
+    division = [1,2,3,4,5]
 
     for a in año:
         for div in division:
             descarga_info(driver, a, div)
+            print("año:", a, "Division:", div)
             time.sleep(2)
 
 
