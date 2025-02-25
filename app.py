@@ -15,7 +15,6 @@ def main():
     try:
         archivos_descargados = buscar_archivos(Config.ruta_directorio_input)
         for archivo in archivos_descargados:
-            print(archivo)
             # Luego de terminado el proceso de tranformacion de xls a xlsx extraemos el nombre resultado
             nombre_excel = progress(archivo)
             '''' ---------- Esto lo uso para hacer pruebas sin scrapear -----------'''
@@ -23,10 +22,13 @@ def main():
             # nombre_excel = nomnre_excel[0]
             # # Lo convertimos en df
             ''' ----------------------------------------------------------------- '''
+
             df = pd.read_excel(f"{Config.ruta_directorio_input}/{nombre_excel}")
 
             # Lo limpiamos
             df_limpio = limpiar_df(df)
+
+            # Exportamos para comprobar
             resultado = analisis_df(df_limpio)
 
             # Renombramos el excel para que no se repita el xlsx
@@ -70,12 +72,14 @@ def main():
             
         try:
             # Remover archivos de input
-            os.remove(f"{Config.ruta_directorio_input}/{nombre_excel}.xlsx")
-            if os.remove:
-                print("🗑 Se removio con exito el elemento de INPUTS")
+            archivos_xlsx_input = os.listdir(Config.ruta_directorio_input)
+            for archivo in archivos_xlsx_input:
+                os.remove(f"{Config.ruta_directorio_input}/{nombre_excel}.xlsx")
+                if os.remove:
+                    print("🗑 Se removio con exito el elemento de INPUTS")
 
         except Exception as e:
-            print("❌ ERROR: Se produjo un error al intentar eliminar el elemento de INPUTS")
+            print("❌ ERROR: Se produjo un error al intentar eliminar el elemento de INPUTS. Msj Error: ", e)
 
                         
         

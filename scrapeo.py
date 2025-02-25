@@ -5,6 +5,7 @@ import pyautogui as py
 import time
 import pyperclip
 import os
+from config import Config
 
 tiempoEntrePasos = 0.7 
 
@@ -57,7 +58,7 @@ def scrapeo ():
     edge_driver_path = "C:/msedgedriver.exe"  # Cambia esto
 
     # Configurar la carpeta de descarga
-    carpeta_descargas = os.path.abspath("C:/Users/Usuario/OneDrive/Escritorio/automatizacionNotas/inputs")  # Cambia esta ruta
+    carpeta_descargas = os.path.abspath(Config.ruta_directorio_input)  # Cambia esta ruta
 
     # Crear opciones para Edge
     options = webdriver.EdgeOptions()
@@ -88,13 +89,12 @@ def scrapeo ():
     button_ingresar.click()
 
     time.sleep(1)
-    año = [1,2,3,4,5]
-    division = [1,2,3,4,5]
+    año = [1]
+    division = [1,2, 3]
 
     for a in año:
         for div in division:
             descarga_info(driver, a, div)
-            print("año:", a, "Division:", div)
             time.sleep(2)
 
 
