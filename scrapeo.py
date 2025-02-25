@@ -90,7 +90,7 @@ def scrapeo ():
 
     time.sleep(1)
     año = [1,2,3,4,5]
-    division = [1,2, 3, 4, 5]
+    division = [1,2,3,4,5]
 
     for a in año:
         for div in division:

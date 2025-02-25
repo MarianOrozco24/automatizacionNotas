@@ -1,4 +1,5 @@
 import pandas as pd
+from config import Config
 
 def limpiar_df (df):
     # Eliminamos la fila 0 y renombramos las columnas con los valores de la fila 1
@@ -11,9 +12,16 @@ def limpiar_df (df):
     # Creamos un df llamado nombres con el valor del df principal en la posicion 0
     df_nombres = df.loc[:, columnas_df[0]]
 
-    # Creamos un df_filtrado con los valores de la calificacion final
-    df_filtrado = df.loc[:, "Calificación Final":"Intensificación"]
 
+    ''' Conficion del filtrado. si el mes en curso es > o = a 02 entonces ejecutamos esta linea, sino filtramos calificacion final'''
+
+    if Config.mes >= 2 and Config.mes <= 4:
+        # Creamos un df_filtrado con los valores de la calificacion final
+        df_filtrado = df.loc[:, "Acreditación": :]
+        print(f"⏩Mes actual: {Config.mes} columna filtrada 'Acreditacion'")
+    else:
+        df_filtrado = df.loc[:, "Calificación Final": "Intensificación"]
+        print(f"⏩Mes actual: {Config.mes} columna filtrada 'Calificacion final'")
     df_nombres = df_nombres.to_frame()  # Convierte Series a DataFrame
 
     # Concatenamos los df
@@ -49,7 +57,7 @@ def analisis_df (df):
                 for index_columns in range(1, len(df.columns) - 1):
                     
                     # condicionamos las notas de cada alumno
-                    if df.iloc[index, index_columns] < 7:
+                    if df.iloc[index, index_columns] < 7 or pd.isna(df.iloc[index, index_columns]):
                         materias_x_alumno.append(df.columns[index_columns])
 
 
